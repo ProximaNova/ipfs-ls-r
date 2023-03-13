@@ -1,0 +1,12 @@
+#!/bin/bash
+#run: ./thisscript.sh [CID here]
+level0c=$1
+for x in {1..6}
+do
+#  eval1+='fast=$(ipfs ls $level'"$(expr $x - 1)"'c | xxd -ps -);    for a'"$(expr $x - 1)"' in $(eval echo {1..$(echo $fast | xxd -ps -r - | wc -l)})      do        level'"$x"'=$(echo $fast | xxd -ps -r - | tail +$a'"$(expr $x - 1)"' | head -n 1);         level'"$x"'c=$(echo $fast | xxd -ps -r - | tail +$a'"$(expr $x - 1)"' | head -n 1 | sed "s/ .*//g");         echo -n '$ev'; echo $level'"$x"';     '
+eval1='fast=$(ipfs ls $level0c | xxd -ps -);    for a0 in $(eval echo {1..$(echo $fast | xxd -ps -r - | wc -l)});      do        level1=$(echo $fast | xxd -ps -r - | tail +$a0 | head -n 1);         level1c=$(echo $fast | xxd -ps -r - | tail +$a0 | head -n 1 | sed "s/ .*//g");         echo -n ; echo $level1;     fast=$(ipfs ls $level1c | xxd -ps -);    for a1 in $(eval echo {1..$(echo $fast | xxd -ps -r - | wc -l)});      do        level2=$(echo $fast | xxd -ps -r - | tail +$a1 | head -n 1);         level2c=$(echo $fast | xxd -ps -r - | tail +$a1 | head -n 1 | sed "s/ .*//g");         echo -n -; echo $level2;     fast=$(ipfs ls $level2c | xxd -ps -);    for a2 in $(eval echo {1..$(echo $fast | xxd -ps -r - | wc -l)});      do        level3=$(echo $fast | xxd -ps -r - | tail +$a2 | head -n 1);         level3c=$(echo $fast | xxd -ps -r - | tail +$a2 | head -n 1 | sed "s/ .*//g");         echo -n --; echo $level3;     fast=$(ipfs ls $level3c | xxd -ps -);    for a3 in $(eval echo {1..$(echo $fast | xxd -ps -r - | wc -l)});      do        level4=$(echo $fast | xxd -ps -r - | tail +$a3 | head -n 1);         level4c=$(echo $fast | xxd -ps -r - | tail +$a3 | head -n 1 | sed "s/ .*//g");         echo -n ---; echo $level4;     fast=$(ipfs ls $level4c | xxd -ps -);    for a4 in $(eval echo {1..$(echo $fast | xxd -ps -r - | wc -l)});      do        level5=$(echo $fast | xxd -ps -r - | tail +$a4 | head -n 1);         level5c=$(echo $fast | xxd -ps -r - | tail +$a4 | head -n 1 | sed "s/ .*//g");         echo -n ----; echo $level5;     fast=$(ipfs ls $level5c | xxd -ps -);    for a5 in $(eval echo {1..$(echo $fast | xxd -ps -r - | wc -l)});      do        level6=$(echo $fast | xxd -ps -r - | tail +$a5 | head -n 1);         level6c=$(echo $fast | xxd -ps -r - | tail +$a5 | head -n 1 | sed "s/ .*//g");         echo -n -----; echo $level6;     done; done; done; done; done; done; '
+#  ev+='-'
+#  evalend+='done; '
+done
+# eval1="$eval1""$evalend"
+eval "$eval1"
