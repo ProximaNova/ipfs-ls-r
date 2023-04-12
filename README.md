@@ -18,7 +18,7 @@ In order to show the contents of a folder in recursive way, do this:
 
 Run the script like this:
 - `./ipfs-ls-r.sh [depthnumber] [cid] [cidtoexclude]`
-- Note: `cidtoexclude` is optional
+- Info: `cidtoexclude` is optional; `0` as `depthnumber` goes deeper than `1`
 
 ## Todo
 - Make it able to traverse all folders, with any max depth
