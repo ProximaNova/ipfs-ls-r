@@ -19,12 +19,21 @@ then
     exit 0
 elif [ $1 -eq 0 ]
 then
-    # shows only the contents of one folder
-    # todo: should show the contents of multiple folders
-    cid1=$(grep "/$" output1.txt | head -n 1 | sed "s/ .*//g")
+    # done: shows the contents of multiple folders
+    # todo: handle filenames with ampersands properly
     cids=$(grep "/$" output1.txt | wc -l)
-    cid_ls=$(ipfs ls $cid1 | sed "s/\//\x5c\//g" | sed "s/^/ /g" | perl -pE "s/\n/\\\r/g")
-    vim -c "%s/\($cid1.*\)/\1 \r$cid_ls/g | %s/\n\n/\r/g | wq" output1.txt
+    x=0
+    while [ $x -lt $cids ]
+    do
+        cid1=$(grep "/$" output1.txt | head -n 1 | sed "s/ .*//g")   
+        cid_ls=$(ipfs ls $cid1 | sed "s/\//\x5c\x5c\//g" | sed "s/^/ /g" | perl -pE "s/\n/\\\\\\r/g" | perl -pE "s/&/\\\\\\\\\&/g")
+	echo $cid_ls >> output4.txt
+        echo 'execute "%s/\\('$cid1'.*\\)/\\1 \\r'$cid_ls'/g"' > output2.txt
+       	echo 'execute "%s/\\n\\n/\\r/g"' >> output2.txt
+	echo 'execute "wq"' >> output2.txt
+	vim "output1.txt" -c 'execute "so output2.txt"'
+	x=$(( $x + 1 ))
+    done
     echo 'INFO - Level 2 done.'
     if [ $(grep "^ .*/$" output1.txt | wc -l) -gt 0 ]
     then
@@ -33,7 +42,7 @@ then
 	while [ $x -lt $cids ]
         do
             cid1=$(grep "^ \S.*/$" output1.txt | head -n 1 | sed "s/^ //g" | sed "s/ .*//g")
-            cid_ls=$(ipfs ls $cid1 | sed "s/\//\x5c\x5c\//g" | sed "s/^/| /g" | perl -pE "s/\n/\\\\\\r/g")
+            cid_ls=$(ipfs ls $cid1 | sed "s/\//\x5c\x5c\//g" | sed "s/^/| /g" | perl -pE "s/\n/\\\\\\r/g" | perl -pE "s/&/\\\\\\\\\&/g")
             echo 'execute "%s/\\('$cid1'.*\\)/\\1 \\r'$cid_ls'/g"' > output2.txt
             echo 'execute "%s/\\n\\n/\\r/g"' >> output2.txt
             echo 'execute "wq"' >> output2.txt
@@ -49,7 +58,7 @@ then
         while [ $x -lt $cids ]
         do
             cid1=$(grep "^| \S.*/$" output1.txt | head -n 1 | sed "s/^| //g" | sed "s/ .*//g")
-            cid_ls=$(ipfs ls $cid1 | sed "s/\//\x5c\x5c\//g" | sed "s/^/|| /g" | perl -pE "s/\n/\\\\\\r/g")
+            cid_ls=$(ipfs ls $cid1 | sed "s/\//\x5c\x5c\//g" | sed "s/^/|| /g" | perl -pE "s/\n/\\\\\\r/g" | perl -pE "s/&/\\\\\\\\\&/g")
             echo 'execute "%s/\\('$cid1'.*\\)/\\1 \\r'$cid_ls'/g"' > output2.txt
             echo 'execute "%s/\\n\\n/\\r/g"' >> output2.txt
             echo 'execute "wq"' >> output2.txt
@@ -65,7 +74,7 @@ then
         while [ $x -lt $cids ]
         do
             cid1=$(grep "^|| \S.*/$" output1.txt | head -n 1 | sed "s/^|| //g" | sed "s/ .*//g")
-            cid_ls=$(ipfs ls $cid1 | sed "s/\//\x5c\x5c\//g" | sed "s/^/||| /g" | perl -pE "s/\n/\\\\\\r/g")
+            cid_ls=$(ipfs ls $cid1 | sed "s/\//\x5c\x5c\//g" | sed "s/^/||| /g" | perl -pE "s/\n/\\\\\\r/g" | perl -pE "s/&/\\\\\\\\\&/g")
             echo 'execute "%s/\\('$cid1'.*\\)/\\1 \\r'$cid_ls'/g"' > output2.txt
             echo 'execute "%s/\\n\\n/\\r/g"' >> output2.txt
             echo 'execute "wq"' >> output2.txt
