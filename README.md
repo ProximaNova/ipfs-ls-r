@@ -1,7 +1,7 @@
 # ipfs-ls-r
-Recursively make a directory listing of an IPFS CID
+Recursively make a directory listing of an IPFS CID in Linux by using ipfs, vim, and perl
 
-This is currently a low-effort thing.
+This is currently a ~low-effort thing. Important: you might be better off using `ipfs refs`. While this thing ("ipfs-ls-r") creates a nice directory listing in a specific format, it probably does not work in all situations. Some concerns over ipfs-ls-r: bugs, not working in different operating systems like Windows, not listing everything in a folder with deep subfolders. `ipfs refs` is an ipfs built-in command, and one could use something like `ipfs refs -r --format="<src> -> <dst> = <linkname>" [cid]` to get a recursive directory listing.
 
 ## Requirements
 In order to recurse an IPFS folder with this script, you will first need:
