@@ -17,6 +17,7 @@ In order to recurse an IPFS folder with this script, you will first need:
 In order to show the contents of a folder in recursive way, run the script like this:
 - If needed, run the IPFS daemon before running this script
 - If wanted, run `chmod a+x ipfs-ls-r.py` in Linux
+- If wanted, delete folder "ignore/" (or don't download it in the first place), since nothing in "ignore/" is used by "ipfs-ls-r.py"
 - run `python ipfs-ls-r.py [cid]` or `./ipfs-ls-r.py [cid]`
 
 ## Considerations
