@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
-import argparse
+# -- usage: run "python thisfile.py [CID]"
+# -- it recursively lists the contents of a CID
+
+import sys
 import subprocess
 import re
 
@@ -16,8 +19,9 @@ def obj_links(start):
         print(x)
     cids2 = []
     for x in output2:
-        cids2.append(str(re.sub(" .*", "", re.sub("^Qm................................................", "", x))))
+        # -- remove "src to" part, remove non-CID part, so only the dest CID remains
+        cids2.append(str(re.sub(" .*", "", re.sub("^Qm................................................|^ba.............................................................", "", x))))
     for n in cids2:
         obj_links(n)
 
-# obj_links("Qm... CID here")
+obj_links(sys.argv[1])
