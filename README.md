@@ -6,7 +6,7 @@ While running a repo in read-only mode (to avoid downloading a lot), do this:
 <br>(a) `ipfs refs -r --format="<src> -> <dst> = <linkname>" [cid]`
 
 or this (in Bash in GNU/Linux):
-<br>(b) `$ find /ipfs/$cid -printf "%Y %F %s %p\n" | xargs -d "\n" sh -c 'for args do
+<br>(b) `$ find /ipfs/$c -printf "%Y %F %s %p\n" | xargs -d "\n" sh -c 'for args do
 cid=$(echo "$args" | sed "s/^\S \S* \S* //g"); echo -n $(ipfs resolve "$cid" | sed
 "s/\/ipfs\///g"); echo " $args"; done' _`
 
